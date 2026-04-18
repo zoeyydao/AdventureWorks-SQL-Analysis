@@ -14,7 +14,7 @@ The analysis was conducted using three core tables:
 ## Tools & Techniques
 Platform: Databricks (SQL Warehouse)
 
-Language: Databricks SQL (ANSI-compliant)
+Language: SQL 
 
 
 ## Business Questions
