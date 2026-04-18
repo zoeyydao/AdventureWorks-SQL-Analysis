@@ -10,7 +10,7 @@ The analysis was conducted using three core tables:
 - `fact_sales` – sales transactions  
 - `dim_products` – product details  
 
----
+
 
 ## Business Questions
 
