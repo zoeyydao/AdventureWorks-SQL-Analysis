@@ -1,5 +1,5 @@
 # AdventureWorks Sales Analysis Case Study
-
+![img](AdventureWorks%20img/img.png)
 ## Project Overview
 
 AdventureWorks is a global company that sells bikes, accessories, and components worldwide. As a junior data analyst, the objective of this project was to explore transactional and dimensional data using SQL and answer business questions that support decision-making.
@@ -8,8 +8,13 @@ The analysis was conducted using three core tables:
 
 - `dim_customers` – customer information  
 - `fact_sales` – sales transactions  
-- `dim_products` – product details  
+- `dim_products` – product details
+  
 
+## Tools & Techniques
+Platform: Databricks (SQL Warehouse)
+
+Language: Databricks SQL (ANSI-compliant)
 
 
 ## Business Questions
@@ -24,6 +29,7 @@ WHERE country = "Australia";
 ```
 Result:
 
+![q1.1](AdventureWorks%20img/q1.1.png)
 
 **1.2** The marketing team is interested in customer demographics. Show the number of customers grouped by gender.  
 ```sql
@@ -32,6 +38,8 @@ FROM  workspace.sqlproject.gold_dim_customers
 GROUP BY gender;
 ```
 Result:
+
+![q1.2](AdventureWorks%20img/q1.2.png)
 
 **1.3** Create a column that segments customers into age groups:
 
@@ -53,6 +61,8 @@ FROM workspace.sqlproject.gold_dim_customers;
 ```
 Result:
 
+![q1.3](AdventureWorks%20img/q1.3.png)
+
 ```sql
 SELECT
    SUM(CASE WHEN 2025 - YEAR(birthdate)<30 THEN 1 ELSE 0 END) AS below_30,
@@ -62,6 +72,8 @@ FROM workspace.sqlproject.gold_dim_customers;
 ```
 
 Result:
+
+![q1.3.2](AdventureWorks%20img/q1.3.2.png)
 
 ---
 
@@ -75,6 +87,8 @@ WHERE YEAR(order_date) = 2013 AND MONTH(order_date) = 3;
 ```
 Result:
 
+![q2.1](AdventureWorks%20img/q2.1.png)
+
 **2.2** Calculate the total revenue and total quantity for each month in 2013.  
 ```sql
 SELECT MONTH(order_date) AS month, SUM(quantity*price) AS total_revenue, SUM(quantity) AS total_quantity
@@ -84,6 +98,8 @@ GROUP BY MONTH(order_date)
 ORDER BY MONTH(order_date) ASC ;
 ```
 Result:
+
+![q2.2](AdventureWorks%20img/q2.2.png)
 
 **2.3** Find out which month in 2013 had the highest total sales amount.
 ```sql
@@ -95,6 +111,8 @@ ORDER BY 2 DESC
 LIMIT 1;
 ```
 Result:
+
+![q2.3](AdventureWorks%20img/q2.3.png)
 
 ---
 
@@ -109,6 +127,8 @@ WHERE category = "Bikes";
 ```
 Result:
 
+![q3.1](AdventureWorks%20img/q3.1.png)
+
 **3.2** Join the sales table with products and calculate the total sales amount per product name.  
 ```sql
 SELECT p.product_name, SUM(s.sales_amount)
@@ -119,6 +139,8 @@ GROUP BY p.product_name
 ORDER BY 2;
 ```
 Result:
+
+![q3.2](AdventureWorks%20img/q3.2.png)
 
 **3.3** For each product category, calculate its total revenue.  
 ```sql
@@ -131,6 +153,8 @@ ORDER BY 2 DESC;
 ```
 Result:
 
+![q3.3](AdventureWorks%20img/q3.3.png)
+
 **3.4** Which five products generated the highest revenue?
 ```sql
 SELECT p.product_name, SUM(s.sales_amount)
@@ -142,6 +166,8 @@ ORDER BY 2 DESC
 LIMIT 5;
 ```
 Result:
+
+![q3.4](AdventureWorks%20img/q3.4.png)
 
 ---
 
@@ -160,6 +186,8 @@ LIMIT 5;
 ```
 Result:
 
+![q4.1](AdventureWorks%20img/q4.1.png)
+
 **4.2** For each gender, calculate the total sales revenue.  
 ```sql
 SELECT c.gender, SUM(s.quantity*s.price) as total_revenue
@@ -169,6 +197,8 @@ LEFT JOIN workspace.sqlproject.gold_fact_sales s
 GROUP BY c.gender;
 ```
 Result:
+
+![q4.2](AdventureWorks%20img/q4.2.png)
 
 **4.3** Segment orders into two types:
 
@@ -183,6 +213,9 @@ SELECT
 FROM workspace.sqlproject.gold_fact_sales;
 ```
 Result:
+
+![q4.3](AdventureWorks%20img/q4.3.png)
+
 
 ---
 
@@ -199,6 +232,8 @@ LEFT JOIN workspace.sqlproject.gold_dim_products p
 GROUP BY 1
 ```
 Result:
+
+![q5.1](AdventureWorks%20img/q5.1.png)
 
 **5.2** Use a subquery to find customers whose total spending is above the average customer spending.  
 ```sql
@@ -220,6 +255,8 @@ HAVING SUM(sales_amount) > (
 ```
 Result:
 
+![q5.2](AdventureWorks%20img/q5.2.png)
+
 **5.3** Use a subquery to find products whose revenue is above the average product revenue.
 ```sql
 SELECT p.product_name, SUM(sales_amount) AS Total_revenue
@@ -240,6 +277,8 @@ HAVING SUM(sales_amount) > (
 ```
 Result:
 
+![q5.3](AdventureWorks%20img/q5.3.png)
+
 ---
 
 ### Part 6: Extra Tasks
@@ -254,6 +293,8 @@ SELECT p.product_name AS name
 FROM workspace.sqlproject.gold_dim_products p
 ```
 Result:
+
+![q6.1](AdventureWorks%20img/q6.1.png)
 
 **6.2** List all customer IDs who either made a purchase in 2013 OR whose country is Australia.
 ```sql
@@ -270,3 +311,5 @@ FROM workspace.sqlproject.gold_dim_customers c
 WHERE country = 'Australia';
 ```
 Result:
+
+![q6.2](AdventureWorks%20img/q6.2.png)
